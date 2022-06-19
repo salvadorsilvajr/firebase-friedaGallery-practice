@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextTheme } from "../context/ContextTheme";
 // import { useDispatch, useSelector } from "react-redux";
@@ -8,25 +8,24 @@ import {
     Image,
     ListGroup,
     // Card,
-    Button,
-    Form,
+    // Button,
+    // Form,
 } from "react-bootstrap";
-import { db } from "../../src/firebase/firebaseConfig";
-import {
-    collection,
-    addDoc,
-    doc,
-    updateDoc,
-    deleteDoc,
-    serverTimestamp,
-} from "firebase/firestore";
+// import { db } from "../../src/firebase/firebaseConfig";
+import // collection,
+// addDoc,
+// doc,
+// updateDoc,
+// deleteDoc,
+// serverTimestamp,
+"firebase/firestore";
 // import catalago from "../data/catalago";
 // import reviews from "../data/reviews";
 import { useAuth } from "../context/ContextTheme";
-import Rating from "../components/Rating";
+// import Rating from "../components/Rating";
 import Message from "../components/Message";
-import MensajeFijo from "../components/MensajeFijo";
-import AddPicturesGallery from "../components/AddPicturesGallery";
+// import MensajeFijo from "../components/MensajeFijo";
+// import AddPicturesGallery from "../components/AddPicturesGallery";
 // import reviews from "../data/reviews";
 // import reviews from "../data/reviews";
 // import Loader from "../components/Loader";
@@ -39,13 +38,13 @@ import AddPicturesGallery from "../components/AddPicturesGallery";
 
 const ProductScreen = ({ history, match }) => {
     const { catalago } = useContext(ContextTheme);
-    const { reviews } = useContext(ContextTheme);
+    // const { reviews } = useContext(ContextTheme);
     // const { user } = useContext(ContextTheme);
-    const [urls, setUrls] = useState("");
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState("");
+    // const [urls, setUrls] = useState("");
+    // const [rating, setRating] = useState(0);
+    // const [comment, setComment] = useState("");
     const [message, setMessage] = useState(null);
-    const [yacomente, setYacomente] = useState(false);
+    // const [yacomente, setYacomente] = useState(false);
 
     const { user } = useAuth();
     console.log(user);
@@ -54,118 +53,111 @@ const ProductScreen = ({ history, match }) => {
 
     const product = catalago.find((x) => x.id.toString() === productId);
 
-    const myReviews = reviews.filter((r) => r.cursoId === product.id);
-    console.log(myReviews, productId);
-    const addpicturestogalleria = () => {
-        const archivo = collection(db, "fotosgaleria");
-        urls.map(async (url) => {
-            const payload = {
-                userId: user.auth.currentUser.uid,
-                cursoId: product.id,
-                name: user.auth.currentUser.displayName,
-                images: url,
-                timestamp: serverTimestamp(),
-            };
+    // const myReviews = reviews.filter((r) => r.cursoId === product.id);
+    // console.log(myReviews, productId);
+    // const addpicturestogalleria = () => {
+    //     const archivo = collection(db, "fotosgaleria");
+    //     urls.map(async (url) => {
+    //         const payload = {
+    //             userId: user.auth.currentUser.uid,
+    //             cursoId: product.id,
+    //             name: user.auth.currentUser.displayName,
+    //             images: url,
+    //             timestamp: serverTimestamp(),
+    //         };
 
-            await addDoc(archivo, payload)
-                .then(() => {
-                    setMessage("Nuevo Comentario y calificacion agregados...");
-                })
-                .catch((err) => {
-                    console.log("something when Wrong...");
-                    console.log(err);
-                });
-        });
-    };
+    //         await addDoc(archivo, payload)
+    //             .then(() => {
+    //                 setMessage("Nuevo Comentario y calificacion agregados...");
+    //             })
+    //             .catch((err) => {
+    //                 console.log("something when Wrong...");
+    //                 console.log(err);
+    //             });
+    //     });
+    // };
 
-    useEffect(() => {
-        user &&
-            myReviews &&
-            myReviews.map((review) => {
-                review.userId === user.auth.currentUser.uid &&
-                    setYacomente(true);
-            });
-    }, [myReviews, user]);
+    // useEffect(() => {
+    //     user &&
+    //         myReviews &&
+    //         myReviews.map((review) => {
+    //             review.userId === user.auth.currentUser.uid &&
+    //                 setYacomente(true);
+    //         });
+    // }, [myReviews, user]);
 
     // console.log(yacomente);
-    const updateproductRating = async () => {
-        const docRef = doc(db, "catalago", productId);
+    // const updateproductRating = async () => {
+    //     const docRef = doc(db, "catalago", productId);
 
-        const prodPayload = {
-            numReviews: myReviews.length,
-            rating:
-                myReviews.reduce((acc, item) => item.rating + acc, 0) /
-                myReviews.length,
-        };
-        await updateDoc(docRef, prodPayload)
-            .then(() => {
-                console.log("calificaion calculada correctamente ...");
-            })
-            .catch((err) => {
-                setMessage("Algo salio mal ...", err);
-            });
-        // setReviewstoday([]);
-    };
+    //     const prodPayload = {
+    //         numReviews: myReviews.length,
+    //         rating:
+    //             myReviews.reduce((acc, item) => item.rating + acc, 0) /
+    //             myReviews.length,
+    //     };
+    //     await updateDoc(docRef, prodPayload)
+    //         .then(() => {
+    //             console.log("calificaion calculada correctamente ...");
+    //         })
+    //         .catch((err) => {
+    //             setMessage("Algo salio mal ...", err);
+    //         });
+    //     // setReviewstoday([]);
+    // };
 
-    updateproductRating();
+    // updateproductRating();
 
-    const borrarComentario = async ({ id }) => {
-        setMessage("Borrando tu Comentario y Calificacion");
-        const docRef = doc(db, "reviews", id);
-        await deleteDoc(docRef);
-    };
+    // const borrarComentario = async ({ id }) => {
+    //     setMessage("Borrando tu Comentario y Calificacion");
+    //     const docRef = doc(db, "reviews", id);
+    //     await deleteDoc(docRef);
+    // };
 
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        const alreadyReviewed = reviews.find(
-            (r) => r.userId === user.auth.currentUser.uid
-        );
+    // const submitHandler = async (e) => {
+    //     e.preventDefault();
+    //     const alreadyReviewed = reviews.find(
+    //         (r) => r.userId === user.auth.currentUser.uid
+    //     );
 
-        if (alreadyReviewed) {
-            // res.status(400);
-            setMessage("Ya calificaste este curso anteriormente ...");
-        } else {
-            const archivo = collection(db, "reviews");
-            const payload = {
-                userId: user.auth.currentUser.uid,
-                cursoId: product.id,
-                name: user.auth.currentUser.displayName,
-                rating: Number(rating),
-                comment,
-                userImage: user.auth.currentUser.photoURL,
-                timestamp: serverTimestamp(),
-            };
+    //     if (alreadyReviewed) {
+    //         // res.status(400);
+    //         setMessage("Ya calificaste este curso anteriormente ...");
+    //     } else {
+    //         const archivo = collection(db, "reviews");
+    //         const payload = {
+    //             userId: user.auth.currentUser.uid,
+    //             cursoId: product.id,
+    //             name: user.auth.currentUser.displayName,
+    //             rating: Number(rating),
+    //             comment,
+    //             userImage: user.auth.currentUser.photoURL,
+    //             timestamp: serverTimestamp(),
+    //         };
 
-            await addDoc(archivo, payload)
-                .then(() => {
-                    setMessage("Nuevo Comentario y calificacion agregados...");
-                })
-                .catch((err) => {
-                    console.log("something when Wrong...");
-                    console.log(err);
-                });
-            addpicturestogalleria();
-            updateproductRating();
-            setComment("");
-            setRating(0);
-            setUrls("");
-            setMessage(null);
-        }
-
-        // product.numReviews = reviews.length;
-
-        // product.rating =
-        //     reviews.reduce((acc, item) => item.rating + acc, 0) /
-        //     reviews.length;
-        // console.log("num" + product.numReviews, "rating" + product.rating);
-    };
+    //         await addDoc(archivo, payload)
+    //             .then(() => {
+    //                 setMessage("Nuevo Comentario y calificacion agregados...");
+    //             })
+    //             .catch((err) => {
+    //                 console.log("something when Wrong...");
+    //                 console.log(err);
+    //             });
+    //         addpicturestogalleria();
+    //         updateproductRating();
+    //         setComment("");
+    //         setRating(0);
+    //         setUrls("");
+    //         setMessage(null);
+    //    }
+    // };
 
     return (
         <>
             <Link className='btn btn-light my-3' to='/'>
                 Go Back
             </Link>
-            {/* {message && <Message setMessage={setMessage} />} */}
+            {message && <Message setMessage={setMessage} />}
             <Row style={{ justifyContent: "center" }}>
                 <Col
                     md={6}
@@ -186,12 +178,12 @@ const ProductScreen = ({ history, match }) => {
                             <h2>{product.categoria.toLowerCase()}</h2>
                             {/* <h5>{product.especialidad}</h5> */}
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        {/* <ListGroup.Item>
                             <Rating
                                 value={product.rating}
                                 text={` ${product.numReviews} reviews`}
                             />
-                        </ListGroup.Item>
+                        </ListGroup.Item> */}
                         <ListGroup.Item>
                             <b>Title :</b> {product.title}
                         </ListGroup.Item>
@@ -201,9 +193,8 @@ const ProductScreen = ({ history, match }) => {
                     </ListGroup>
                 </Col>
             </Row>
-            <Row style={{ justifyContent: "center" }}>
+            {/* <Row style={{ justifyContent: "center" }}>
                 <Col md={9}>
-                    {/* <h2>Reviews</h2> */}
                     {myReviews.length === 0 ? (
                         // console.log("No Hay Comentarios")
                         <MensajeFijo variant='primary'>
@@ -369,7 +360,7 @@ const ProductScreen = ({ history, match }) => {
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
-            </Row>
+            </Row> */}
         </>
     );
 };
