@@ -3,11 +3,7 @@ import { ContextTheme } from "./context/ContextTheme";
 import { Container } from "react-bootstrap";
 import { Route, Switch } from "react-router";
 import "dotenv/config";
-// import theme from "./styles/Theme";
 import Header from "./components/Header";
-// import { getMessaging, onMessage } from "firebase/messaging";
-// import Suscribe from "./components/Suscribe";
-// import ReactNotification from "./components/ReactNotification";
 import Footer from "./components/Footer";
 import EditarCurso from "./components/EditCurso";
 import ProductScreen from "./components/ProductScreen";
@@ -24,8 +20,7 @@ import InfoPrices from "./screens/InfoPrices";
 import CrearCuenta from "./screens/CrearCuenta";
 import AlertMsg from "./components/AlertMsg";
 import Error404 from "./components/Error404";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "./firebase/firebaseConfig";
+import { Getrole } from "./utils/Myfunction";
 
 const App = () => {
     const { user } = useContext(ContextTheme);
@@ -35,17 +30,8 @@ const App = () => {
 
     const [userRole, setUserRole] = useState(0);
 
-    const getrole = () => {
-        const id = user.uid;
-        const docRef = doc(db, "users", id);
-        getDoc(docRef).then((doc) => {
-            setUserRole(doc.data().userRol);
-            // console.log(doc.data(), doc.data().userRol);
-        });
-    };
-
     if (user) {
-        getrole();
+        Getrole(setUserRole);
     }
 
     return (

@@ -6,7 +6,7 @@ const AlertMsg = ({ infoRequest }) => {
     // const [showA, setShowA] = useState(true);
     return (
         <>
-            <ToastContainer position='top-end'>
+            <ToastContainer position='top-end' className='alert-fixed '>
                 {infoRequest.map((inforeq, ind) => (
                     <Toast
                         key={inforeq.id}

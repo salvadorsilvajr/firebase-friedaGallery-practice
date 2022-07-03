@@ -21,7 +21,7 @@ import // collection,
 "firebase/firestore";
 // import catalago from "../data/catalago";
 // import reviews from "../data/reviews";
-import { useAuth } from "../context/ContextTheme";
+// import { useAuth } from "../context/ContextTheme";
 // import Rating from "../components/Rating";
 import Message from "../components/Message";
 // import MensajeFijo from "../components/MensajeFijo";
@@ -46,8 +46,8 @@ const ProductScreen = ({ history, match }) => {
     const [message, setMessage] = useState(null);
     // const [yacomente, setYacomente] = useState(false);
 
-    const { user } = useAuth();
-    console.log(user);
+    // const { user } = useAuth();
+    // console.log(user);
 
     const productId = match.params.id;
 

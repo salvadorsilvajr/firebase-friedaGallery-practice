@@ -22,7 +22,7 @@ const Product = ({ product }) => {
                 <Link to={`/product/${product.id}`}>
                     <Card.Img
                         // style={{ maxHeight: "14em" }}
-                        onMouseEnter={displayTitle}
+                        onMouseOver={displayTitle}
                         onMouseLeave={displayTitlenot}
                         className='productImage'
                         src={product.url}

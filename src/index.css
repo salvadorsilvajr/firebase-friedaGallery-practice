@@ -82,6 +82,15 @@ a {
     color: white;
 }
 
+.alert-fixed {
+    position:fixed; 
+    top: 0px; 
+    left: 3%; 
+    width: 100%;
+    z-index:9999; 
+    border-radius:0px
+}
+
 .showlog {
     display: none;
 }
@@ -164,7 +173,7 @@ h2 {
     /* border: groove 1.5em #a3a295;; */
 }
 .productImage:hover {
-    opacity: 50%;
+    opacity: 0.55;
     display: block;
     /* border: groove 1.5em #a3a295;; */
 }
@@ -190,7 +199,7 @@ h2 {
 .titleparrafo {
     position: absolute;
     top: 40%;
-    left: 35%;
+    left: 21%;
 
     font-size: 1.5rem;
     font-family: "Abril Fatface", cursive;
@@ -238,7 +247,13 @@ h2 {
     .productscreenImage {
         height: 25em;
     }
-
+    .productImage:hover {
+        opacity: 1;
+        display: block;
+        -moz-opacity:1.0;
+        /* border: groove 1.5em #a3a295;; */
+    }
+    
     .carimg {
         width: 5em;
     }
